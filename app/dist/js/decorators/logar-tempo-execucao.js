@@ -3,7 +3,7 @@ export function logarTempoDeExecucao(emSegundos = false) {
         const metodoOriginal = descriptor.value;
         descriptor.value = function (...args) {
             let divisor = 1;
-            let unidade = 'milisegundos';
+            let unidade = 'milissegundos';
             if (emSegundos) {
                 divisor = 1000;
                 unidade = 'segundos';
