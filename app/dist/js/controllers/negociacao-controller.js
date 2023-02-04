@@ -28,11 +28,20 @@ export class NegociacaoController {
             return;
         }
         this.negociacoes.adiciona(negociacao);
+        console.log(negociacao.paraTexto());
+        console.log(this.negociacoes.paraTexto());
         this.limparFormulario();
         this.atualizaView();
     }
     importaDados() {
         this.negociacoesService.obterNegociacoesDoDia()
+            .then(negociacoesDia => {
+            return negociacoesDia.filter(negociacaoDeHoje => {
+                return !this.negociacoes
+                    .lista()
+                    .some(negociacao => negociacao.ehIgual(negociacaoDeHoje));
+            });
+        })
             .then(negociacoesDia => {
             for (let negociacao of negociacoesDia) {
                 this.negociacoes.adiciona(negociacao);
@@ -68,3 +77,4 @@ __decorate([
     inspect,
     logarTempoDeExecucao()
 ], NegociacaoController.prototype, "adiciona", null);
+//# sourceMappingURL=negociacao-controller.js.map
